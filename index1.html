@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>New Year Rewards – Limited Event</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --gold:#ffd700;
+  --green:#28a745;
+}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:radial-gradient(circle at top,#1c1c2b,#050507);
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* 🎆 FIREWORKS */
+canvas{
+  position:fixed; inset:0;
+  z-index:0; pointer-events:none;
+}
+
+/* LAYOUT */
+.container{
+  position:relative;
+  z-index:1;
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.box{
+  background:rgba(0,0,0,.82);
+  border-radius:20px;
+  padding:40px 30px;
+  width:100%;
+  max-width:700px;
+  text-align:center;
+  box-shadow:0 0 45px rgba(255,215,0,.25);
+}
+h1{font-size:2.5rem;}
+.gold{color:var(--gold);}
+p{font-size:1.1rem;}
+
+.notice{
+  background:#fff3cd;
+  color:#856404;
+  border-radius:12px;
+  padding:14px;
+  margin:18px auto;
+  font-size:.95rem;
+}
+
+.btn{
+  display:inline-block;
+  padding:16px 45px;
+  background:var(--green);
+  color:#fff;
+  text-decoration:none;
+  font-size:1.25rem;
+  font-weight:bold;
+  border-radius:50px;
+  margin-top:15px;
+}
+
+/* COUNTDOWN */
+.countdown{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin:18px 0;
+}
+.time{
+  background:#111;
+  border-radius:12px;
+  padding:10px 14px;
+  min-width:65px;
+}
+.time span{
+  font-size:1.6rem;
+  color:var(--gold);
+}
+
+/* TESTIMONIALS */
+.testimonials{
+  background:#0e0e14;
+  padding:60px 20px;
+  margin-top:40px;
+}
+.testimonials h2{
+  color:var(--gold);
+  text-align:center;
+  margin-bottom:30px;
+}
+.reviews{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:22px;
+  max-width:1100px;
+  margin:auto;
+}
+.review{
+  background:#111;
+  border-radius:16px;
+  padding:20px;
+  box-shadow:0 0 22px rgba(255,215,0,.15);
+}
+.stars{
+  color:#ffd700;
+  font-size:1.15rem;
+  margin-bottom:8px;
+  text-shadow:0 0 6px rgba(255,215,0,.6);
+}
+.review p{font-size:.95rem;color:#ddd;margin:0;}
+.review .user{margin-top:12px;font-size:.85rem;color:#aaa;}
+.amount{color:#28a745;font-weight:bold;}
+
+/* POPUP */
+.popup{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+.popup-box{
+  background:#111;
+  border-radius:18px;
+  padding:28px;
+  max-width:340px;
+  text-align:center;
+  box-shadow:0 0 45px rgba(255,215,0,.35);
+}
+
+/* LIVE NOTIFY */
+.notify{
+  position:fixed;
+  bottom:20px; left:20px;
+  background:#111;
+  border-left:4px solid var(--gold);
+  border-radius:10px;
+  padding:12px 16px;
+  font-size:.85rem;
+  display:none;
+  z-index:999;
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  h1{font-size:2rem;}
+  .box{padding:28px 20px;}
+  .btn{font-size:1.1rem;}
+}
+
+footer{
+  text-align:center;
+  font-size:.75rem;
+  color:#aaa;
+  padding:20px;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="fireworks"></canvas>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="box">
+      <h1>🎉 New Year <span class="gold">Reward Event</span></h1>
+      <p>Earn <b class="gold">up to $50</b> by completing a quick sign-up.</p>
+
+      <div class="notice">
+        ⚠️ <b>Amazon Notice:</b><br>
+        Rewards sold out due to New Year demand. Limited alternative reward available.
+      </div>
+
+      <div class="countdown">
+        <div class="time"><span id="d">00</span></div>
+        <div class="time"><span id="h">00</span></div>
+        <div class="time"><span id="m">00</span></div>
+        <div class="time"><span id="s">00</span></div>
+      </div>
+
+      <a href="#" id="cta" class="btn">Unlock My Reward</a>
+    </div>
+  </div>
+
+  <!-- ⭐ TESTIMONIALS -->
+  <div class="testimonials">
+    <h2>💬 What Users Are Saying</h2>
+    <div class="reviews">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>I earned <span class="amount">$50</span> the same day. Super easy!</p>
+        <div class="user">— Michael R. 🇨🇦 Canada</div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>Signed up in 2 minutes and got rewarded.</p>
+        <div class="user">— Sarah L. 🇬🇧 UK</div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★☆</div>
+        <p>Didn’t expect it, but it worked.</p>
+        <div class="user">— Jason M. 🇺🇸 USA</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 • Earnings may vary • Not affiliated with Amazon, Google or Facebook
+  </footer>
+
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <h2 class="gold">🔥 High Demand</h2>
+    <p>You will be redirected automatically…</p>
+    <a href="#" id="cta2" class="btn">Continue</a>
+  </div>
+</div>
+
+<div class="notify" id="notify"></div>
+
+<script>
+const offers={
+  CA:"https://singingfiles.com/show.php?l=0&u=2480350&id=72884",
+  US:"https://YOUR-USA-OFFER.com",
+  UK:"https://YOUR-UK-OFFER.com",
+  DEFAULT:"https://YOUR-GLOBAL-OFFER.com"
+};
+let finalLink="#";
+
+fetch("https://ipapi.co/json/")
+.then(r=>r.json())
+.then(d=>{
+  finalLink=offers[d.country_code]||offers.DEFAULT;
+  cta.href=finalLink;
+  cta2.href=finalLink;
+});
+
+// popup after 5s
+setTimeout(()=>popup.style.display="flex",5000);
+
+// auto redirect after 10s
+setTimeout(()=>window.location.href=finalLink,10000);
+
+// countdown
+const newYear=new Date(new Date().getFullYear()+1,0,1).getTime();
+setInterval(()=>{
+  const diff=newYear-Date.now();
+  d.innerText=Math.max(0,Math.floor(diff/(1000*60*60*24)));
+  h.innerText=Math.max(0,Math.floor((diff%(1000*60*60*24))/(1000*60*60)));
+  m.innerText=Math.max(0,Math.floor((diff%(1000*60*60))/(1000*60)));
+  s.innerText=Math.max(0,Math.floor((diff%(1000*60))/1000));
+},1000);
+
+// live notifications
+const notify=document.getElementById("notify");
+const names=["Alex","Emma","Daniel","Sarah","Lucas"];
+const countries=["Canada","USA","UK"];
+setInterval(()=>{
+  notify.innerHTML=`💰 <b>${names[Math.floor(Math.random()*5)]}</b> from ${countries[Math.floor(Math.random()*3)]} earned $50`;
+  notify.style.display="block";
+  setTimeout(()=>notify.style.display="none",4000);
+},8000);
+
+// fireworks
+const canvas=document.getElementById("fireworks"),ctx=canvas.getContext("2d");
+canvas.width=innerWidth; canvas.height=innerHeight;
+setInterval(()=>{
+  const x=Math.random()*canvas.width,y=Math.random()*canvas.height/2;
+  for(let i=0;i<35;i++){
+    ctx.fillStyle=`hsl(${Math.random()*360},100%,60%)`;
+    ctx.beginPath();
+    ctx.arc(x+Math.random()*80-40,y+Math.random()*80-40,2,0,Math.PI*2);
+    ctx.fill();
+  }
+},1200);
+</script>
+
+</body>
+</html>
